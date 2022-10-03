@@ -5,6 +5,7 @@ import Link from "next/link";
 import WorkoutSelector from "../components/WorkoutSelector";
 import { PrismaClient } from "@prisma/client";
 import { useEffect } from "react";
+import LoginButton from "../components/LoginButton";
 
 // const prisma = new PrismaClient();
 // export async function getServerSideProps() {
@@ -32,6 +33,7 @@ export default function Home() {
 
       <Link href="/createworkout">Create new workout</Link>
       <WorkoutSelector />
+      <LoginButton />
     </div>
   );
 }

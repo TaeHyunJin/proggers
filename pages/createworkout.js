@@ -1,4 +1,5 @@
 import Link from "next/link";
+import WorkoutForm from "../components/WorkoutForm";
 
 export default function CreateWorkout() {
   return (
@@ -8,6 +9,7 @@ export default function CreateWorkout() {
         need to have an api to my database allowing for creation of
         workouts/exercises
       </p>
+      <WorkoutForm />
       <p>
         <button>add exercise</button>
       </p>
