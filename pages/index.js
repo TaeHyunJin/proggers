@@ -4,9 +4,9 @@ import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import WorkoutSelector from "../components/WorkoutSelector";
 import { PrismaClient } from "@prisma/client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import LoginButton from "../components/LoginButton";
-
+import { useSession } from "next-auth/react";
 // const prisma = new PrismaClient();
 // export async function getServerSideProps() {
 //   // get all homes from db
@@ -27,13 +27,26 @@ export default function Home() {
   //   useEffect(() => {
   //     console.log(data);
   //   });
+  const { data: session } = useSession();
+  const [email, setEmail] = useState();
+
+  useEffect(() => {
+    if (session) setEmail(session.user.email);
+  }, [session]);
   return (
     <div className={styles.container}>
       <h1>Proggers</h1>
-
-      <Link href="/createworkout">Create new workout</Link>
-      <WorkoutSelector />
-      <LoginButton />
+      {session ? (
+        <>
+          <Link email={email} href="/createworkout">
+            Create new workout
+          </Link>
+          <WorkoutSelector />
+          <LoginButton />
+        </>
+      ) : (
+        <LoginButton />
+      )}
     </div>
   );
 }
